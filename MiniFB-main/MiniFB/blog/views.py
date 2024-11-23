@@ -105,7 +105,7 @@ def wit_ai_view(request):
         traits = response_data.get('traits', {})
 
         # Default response message
-        reply = "Sorry, I didn't understand that."
+       reply = "Wa ko kasabot uy!"
 
         # Process intents
         if intents:
