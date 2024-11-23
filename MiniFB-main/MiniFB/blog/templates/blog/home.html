@@ -1,0 +1,191 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-bg-success">
+                <div class="card-body">
+                    <div class="h5">@Calipes</div>
+                    <div class="h7" style="color:white; opacity: 70%;">Fullname : Bryan Kim D. Calipes</div>
+                    <div class="h7">Developer of PixelPals</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="h6 text-muted">Followers</div>
+                        <div class="h5">1M</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted">Following</div>
+                        <div class="h5">0</div>
+                    </li>
+                    <li class="list-group-item">DevZ</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 gedf-main ">
+            <!-- Post Creation Section -->
+            <div class="card gedf-card border-success">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">What's on your mind?</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Images</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="message" style="color: #184c34">Post</label>
+                                <textarea class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Upload image</label>
+                                </div>
+                            </div>
+                            <div class="py-4"></div>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar justify-content-between">
+                        <div class="btn-group">
+                            <a type="submit" class="btnS my-3" href="{% url 'post-create' %}">Post</a>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-globe"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Existing Posts Section -->
+            {% for post in posts %}
+            <div class="card gedf-card border-success">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <img class="rounded-circle m-2" width="45" src="{{ user.profile.image.url }}" alt="">
+                            <div class="ml-2" style="color: #184c34">
+                                <div class="h5 m-0">{{ post.author }}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                    <div class="h6 dropdown-header">Configuration</div>
+                                    <a class="dropdown-item" href="#">Save</a>
+                                    <a class="dropdown-item" href="#">Hide</a>
+                                    <a class="dropdown-item" href="#">Report</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i> {{ post.date_posted }}</div>
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-link link-offset-2 link-underline link-underline-opacity-0" style="color: #184c34"><i class="fa fa-thumbs-up"></i> Like</a>
+                    <a href="#" class="card-link link-offset-2 link-underline link-underline-opacity-0" style="color: #184c34"><i class="fa fa-comment"></i> Comment</a>
+                    <a href="#" class="card-link link-offset-2 link-underline link-underline-opacity-0" style="color: #184c34"><i class="fa fa-mail-forward"></i> Share</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Sidebar Section -->
+        <div class="col-md-3">
+            <div class="card gedf-card border-success">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #184c34">Online</h5>
+                    <p class="card-text" style="color: #184c34">------------</p>
+                    <a href="#" class="card-link link-offset-2 link-underline link-underline-opacity-0" style="color: #184c34">More</a>
+                </div>
+            </div>
+            <div class="card gedf-card mt-3 border-success">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #184c34">Recent Messages</h5>
+                    <p class="card-text" style="color: #184c34">------</p>
+                </div>
+            </div>
+            <div class="card gedf-card mt-3 border-success" style="background-color: white;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #184c34;">Chat with AI</h5>
+                    <div id="chatBody" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 15px; border-radius: 5px; background-color: #fff; margin-bottom: 15px;">
+                        <!-- Chat messages will appear here dynamically -->
+                    </div>
+                    <div class="d-flex">
+                        <input type="text" id="userInput" class="form-control" placeholder="Type a message..." style="margin-right: 10px;">
+                        <button class="btn btn-success" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+        function addMessage(content, sender) {
+        const chatBody = document.getElementById('chatBody');
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = content;
+        messageDiv.style.margin = '5px 0';
+        messageDiv.style.padding = '8px';
+        messageDiv.style.borderRadius = '5px';
+        messageDiv.style.backgroundColor = sender === 'user' ? '#184c34' : '#e9ecef';
+        messageDiv.style.color = sender === 'user' ? '#fff' : '#000';
+        messageDiv.style.alignSelf = sender === 'user' ? 'flex-end' : 'flex-start';
+        chatBody.appendChild(messageDiv);
+        chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the bottom
+        }
+
+        function sendMessage() {
+        const userInput = document.getElementById('userInput');
+        const message = userInput.value.trim();
+
+        if (message === '') return; // Ignore empty messages
+        addMessage(message, 'user');
+        userInput.value = ''; // Clear the input field
+
+        // Send message to AI via AJAX
+        fetch('/wit-ai/?message=' + encodeURIComponent(message))
+        .then(response => response.json())
+        .then(data => {
+            if (data.reply) {
+                addMessage(data.reply, 'ai');
+            } else {
+                addMessage('Sorry, I didn\'t understand that.', 'ai');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            addMessage('Error communicating with the AI.', 'ai');
+        });
+        }
+
+</script>
+{% endblock %}
+
